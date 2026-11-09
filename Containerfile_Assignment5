@@ -2,10 +2,10 @@ FROM fedora:latest
 RUN dnf -y upgrade
 
 # Install deps
-RUN dnf -y install tuxpaint vim httpd
+RUN dnf -y install httpd
 
 # Configuration
-COPY myinfo.html /var/www/html/myinfo.html
+COPY data /var/www/html/data
 
 # Runtime stuff
 EXPOSE 80/tcp
