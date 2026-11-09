@@ -1,13 +1,15 @@
-FROM fedora:latest
+FROM fedora:latest AS server
 RUN dnf -y upgrade
 
 # Install deps
 RUN dnf -y install httpd
 
-# Configuration
-COPY data /var/www/html/data
-
 # Runtime stuff
 EXPOSE 80/tcp
 CMD ["httpd", "-D", "FOREGROUND"]
+
+# Configuration
+FROM server
+ARG website=1
+COPY data/website${website}.html /var/www/html
 
