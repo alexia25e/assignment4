@@ -6,10 +6,10 @@ RUN dnf -y install httpd
 
 # Runtime stuff
 EXPOSE 80/tcp
-CMD ["httpd", "-D", "FOREGROUND"]
+ENTRYPOINT ["httpd", "-D", "FOREGROUND"]
 
 # Configuration
 FROM server
 ARG website=1
-COPY data/website${website}.html /var/www/html
-
+LABEL website=${website}
+COPY website${website}.html /var/www/html
